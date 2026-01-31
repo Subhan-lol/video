@@ -32,21 +32,28 @@
     Tap to continue ▶️
   </div>
 
-  <video id="vid" playsinline>
+  <video id="vid" playsinline muted>
     <source src="video.mp4" type="video/mp4">
   </video>
 
   <script>
-    document.body.onclick = () => {
+    document.body.onclick = async () => {
       const v = document.getElementById("vid");
       const msg = document.getElementById("msg");
 
       msg.style.display = "none";
       v.style.display = "block";
 
+      // Fullscreen
       document.documentElement.requestFullscreen?.();
-      v.volume = 1;
-      v.play();
+
+      // Unmute after interaction
+      v.muted = false;
+      try {
+        await v.play();
+      } catch(e){
+        console.log("Play failed", e);
+      }
     };
   </script>
 
