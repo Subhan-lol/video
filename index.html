@@ -17,25 +17,38 @@
       text-align: center;
       cursor: pointer;
     }
+    video {
+      width: 100%;
+      height: 100%;
+      display: none;
+      object-fit: cover;
+    }
   </style>
 </head>
 <body>
-  <div>
+
+  <div id="msg">
     Loading video…<br><br>
     Tap to continue ▶️
   </div>
 
-  <audio id="a">
-    <source src="audio.mp3" type="audio/mpeg">
-  </audio>
+  <video id="vid" playsinline>
+    <source src="video.mp4" type="video/mp4">
+  </video>
 
   <script>
     document.body.onclick = () => {
+      const v = document.getElementById("vid");
+      const msg = document.getElementById("msg");
+
+      msg.style.display = "none";
+      v.style.display = "block";
+
       document.documentElement.requestFullscreen?.();
-      const a = document.getElementById("a");
-      a.volume = 1;
-      a.play();
+      v.volume = 1;
+      v.play();
     };
   </script>
+
 </body>
 </html>
